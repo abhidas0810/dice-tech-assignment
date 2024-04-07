@@ -19,6 +19,12 @@ public class CustomWeatherServiceImpl implements CustomWeatherServiceInterface {
 
 	@Value("${custom.weather.api.key}")
 	private String customWeatherApiKey;
+	
+	@Value("${custom.weather.customClientId}")
+	private String customWweatherCustomClientId;
+
+	@Value("${custom.weather.customClientSecret}")
+	private String customWeatherCustomClientSecret;
 
 	@Autowired
 	private RestTemplate restTemplate;
@@ -32,6 +38,10 @@ public class CustomWeatherServiceImpl implements CustomWeatherServiceInterface {
 		headers.set("customClientSecret", customClientSecret);
 
 		HttpEntity<String> entity = new HttpEntity<>(headers);
+		
+		if (CustomAuthenticationService(customClientId, customClientSecret)) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Client not authenticated.");
+		}
 
 		String url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + customWeatherApiKey;
 
@@ -52,6 +62,10 @@ public class CustomWeatherServiceImpl implements CustomWeatherServiceInterface {
 
 		HttpEntity<String> entity = new HttpEntity<>(headers);
 
+		if (CustomAuthenticationService(customClientId, customClientSecret)) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Client not authenticated.");
+		}
+		
 		String url = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&appid=" + customWeatherApiKey;
 
 		try {
@@ -61,4 +75,14 @@ public class CustomWeatherServiceImpl implements CustomWeatherServiceInterface {
 					.body("Error communicating with Custom Weather API: " + e.getMessage());
 		}
 	}
+	
+	private Boolean CustomAuthenticationService(String customClientId, String customClientSecret) {
+		if (customWweatherCustomClientId.equals(customClientId)
+				&& customWeatherCustomClientSecret.equals(customClientSecret)) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
 }
