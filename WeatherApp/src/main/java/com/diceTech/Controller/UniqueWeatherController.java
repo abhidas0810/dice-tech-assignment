@@ -22,7 +22,7 @@ public class UniqueWeatherController {
 			@RequestHeader("customClientSecret") String customClientSecret) {
 		if (customClientId == null) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Client ID missing.");
-		} else if (customClientId == null) {
+		} else if (customClientSecret == null) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Client secret key missing.");
 		} else {
 			return customWeatherService.getCustomForecastSummaryByLocation(city, customClientId,
@@ -36,7 +36,7 @@ public class UniqueWeatherController {
 			@RequestHeader("customClientSecret") String customClientSecret) {
 		if (customClientId == null) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Client ID missing.");
-		} else if (customClientId == null) {
+		} else if (customClientSecret == null) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Client secret key missing.");
 		} else {
 			return customWeatherService.getCustomHourlyForecastByLocation(city, customClientId, customClientSecret);
