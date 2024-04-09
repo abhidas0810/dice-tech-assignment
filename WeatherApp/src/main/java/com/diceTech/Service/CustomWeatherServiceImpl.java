@@ -20,10 +20,10 @@ public class CustomWeatherServiceImpl implements CustomWeatherServiceInterface {
 	@Value("${custom.weather.api.key}")
 	private String customWeatherApiKey;
 	
-	@Value("${custom.weather.customClientId}")
+	@Value("${spring.security.user.name}")
 	private String customWweatherCustomClientId;
 
-	@Value("${custom.weather.customClientSecret}")
+	@Value("${spring.security.user.password}")
 	private String customWeatherCustomClientSecret;
 
 	@Autowired
