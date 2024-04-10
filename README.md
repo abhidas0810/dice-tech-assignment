@@ -56,6 +56,11 @@ Before running the application, ensure you have the following installed:
 
 2. Open the `index.html` file in a web browser or serve the front end using a web server of your choice.
 
+3. Use Swagger UI (Optional):
+
+Swagger is integrated into the application to provide interactive API documentation. You can access the Swagger UI by navigating to http://localhost:8888/swagger-ui/index.html# after starting the application.
+4. Use customClientId = abhishek and customClientSecret = 123. 
+
 ## Usage
 
 1. Open the Weather App in a web browser.
